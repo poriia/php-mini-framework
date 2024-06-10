@@ -1,6 +1,6 @@
 <?php
 
-$config = require "config.php";
+$config = require base_path('config.php');
 
 $id = $_GET['id'];
 $db = new Database($config['database']);
@@ -10,5 +10,7 @@ $note = $db->query($query, ['id' => $id])->findOrFail();
 $currentUserId = 1;
 authorize($note['user_id'] !== $currentUserId);
 
-$title = $note['title'];
-require "views/note.view.php";
+view('notes/show.view.php', [
+    'title' => $note['title'],
+    'note' => $note
+]);

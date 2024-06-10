@@ -1,6 +1,5 @@
 <?php
 
-require "Response.php";
 function dd($value)
 {
     echo "<pre>";
@@ -20,4 +19,16 @@ function authorize($statement)
     if ($statement) {
         abort(Response::FORBIDDEN);
     }
+}
+
+function base_path($path)
+{
+    return BASE_PATH . $path;
+}
+
+function view($path, $attributes = [])
+{
+    extract($attributes);
+    
+    require base_path('views/' . $path);
 }

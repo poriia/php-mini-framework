@@ -1,6 +1,13 @@
 <?php
 
-require "functions.php";
-require "Database.php";
-require "Validator.php";
-require "router.php";
+const BASE_PATH = __DIR__ . '/../app/';
+
+
+require BASE_PATH . "functions.php";
+
+spl_autoload_register(function ($class) {
+    require base_path("core/{$class}.php");
+});
+
+require base_path('router.php');
+    
